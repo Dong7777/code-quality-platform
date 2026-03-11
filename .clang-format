@@ -8,3 +8,4 @@ AllowShortIfStatementsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: None
 AllowShortLoopsOnASingleLine: false
 SpaceBeforeParens: ControlStatements
+PointerAlignment: Right

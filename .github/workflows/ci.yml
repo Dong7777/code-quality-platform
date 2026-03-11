@@ -17,7 +17,7 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y cppcheck clang-format clang-tidy
+          sudo apt-get install -y cppcheck clang-format clang-tidy python3
 
       - name: Check format
         run: |
@@ -35,3 +35,11 @@ jobs:
       - name: Run clang-tidy
         run: |
           find . -name "*.c" -print0 | xargs -0 -I {} clang-tidy {} -- -std=c99
+
+      - name: Run naming check
+        run: |
+          python3 scripts/check_naming.py
+
+      - name: Run header check
+        run: |
+          python3 scripts/check_headers.py
