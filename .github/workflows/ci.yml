@@ -1,0 +1,29 @@
+name: CI Check
+
+on:
+  push:
+    branches: [ "main", "dev", "feature/**" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  cppcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install cppcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck
+
+      - name: Run cppcheck
+        run: |
+          find . \( -name "*.c" -o -name "*.h" \) | xargs cppcheck \
+            --enable=warning,style,performance,portability,information \
+            --inconclusive \
+            --std=c99 \
+            --error-exitcode=1 \
+            --inline-suppr
